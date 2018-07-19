@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Zencoder</AssemblyName>
+    <VersionPrefix>1.8.0</VersionPrefix>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    
+    <!-- Package Properties -->
+    <Authors>iamcarbon</Authors>
+    <Copyright>© 2010 - 2018 Jason Nelson</Copyright>
+    <Description>A netstandard client for the Zencoder v2 API.</Description>
+    <PackageTags>async;zencoder</PackageTags>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/carbon/Zencoder</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Carbon.Json" Version="1.7.0" />
+  </ItemGroup>
+  
+</Project>
