@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <AssemblyName>Zencoder</AssemblyName>
-    <VersionPrefix>1.8.0</VersionPrefix>
+    <VersionPrefix>1.9.0</VersionPrefix>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     
     <!-- Package Properties -->
     <Authors>iamcarbon</Authors>
     <Copyright>© 2010 - 2018 Jason Nelson</Copyright>
     <Description>A netstandard client for the Zencoder v2 API.</Description>
-    <PackageTags>async;zencoder</PackageTags>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageTags>zencoder async netstandard</PackageTags>
+    <PackageLicenseUrl>https://github.com/carbon/Zencoder/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/carbon/Zencoder</RepositoryUrl>
   </PropertyGroup>
 
