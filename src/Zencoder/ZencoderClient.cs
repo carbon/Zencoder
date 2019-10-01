@@ -5,11 +5,11 @@ using System.Net.Http;
 
 using Carbon.Json;
 
+using Zencoder.Models;
+
 namespace Zencoder
 {
-    using Models;
-
-    public class ZencoderClient
+    public sealed class ZencoderClient
     {
         private const string baseUri = "https://app.zencoder.com/api/v2";
 
@@ -83,10 +83,9 @@ namespace Zencoder
 
         private async Task<string> SendAsync(HttpRequestMessage httpRequest)
         {
-            using (var response = await httpClient.SendAsync(httpRequest).ConfigureAwait(false))
-            {
-                return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            }
+            using HttpResponseMessage response = await httpClient.SendAsync(httpRequest).ConfigureAwait(false);
+
+            return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
         }
 
         #endregion

@@ -65,7 +65,7 @@ namespace Zencoder.Models.Tests
 
             var output = JsonObject.Parse(json).As<OutputMediaFile>();
 
-            Assert.Equal(null, output.ErrorMessage);
+            Assert.Null(output.ErrorMessage);
             Assert.Equal(29D, output.FrameRate);
             Assert.Equal("h264", output.VideoCodec);
             Assert.Equal(768, output.Width);
