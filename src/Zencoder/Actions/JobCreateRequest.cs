@@ -7,7 +7,7 @@ using Carbon.Json;
 
 namespace Zencoder.Models
 {
-    public class JobCreateRequest
+    public sealed class JobCreateRequest
     {
         private static readonly SerializationOptions options = new SerializationOptions {
             IgnoreNullValues = true
