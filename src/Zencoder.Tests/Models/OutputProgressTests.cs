@@ -13,7 +13,7 @@ namespace Zencoder.Models.Tests
 
             var progress = JsonObject.Parse(text).As<OutputProgress>();
 
-            Assert.Equal(ZencoderEvent.Uploading, progress.CurrentEvent);
+            Assert.Equal(ZencoderEventType.Uploading, progress.CurrentEvent);
             Assert.Equal(ZencoderJobState.Finished, progress.State);
         }
 
@@ -25,7 +25,7 @@ namespace Zencoder.Models.Tests
             Assert.Equal(ZencoderJobState.Processing, progress.State);
             Assert.Equal(32.34567D, progress.Progress, 5);
 
-            Assert.Equal(ZencoderEvent.Transcoding, progress.CurrentEvent);
+            Assert.Equal(ZencoderEventType.Transcoding, progress.CurrentEvent);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿#nullable disable
 
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
@@ -13,7 +13,7 @@ namespace Zencoder.Models
         /// Specifying 3 thumbnails on a 8 minute video will result in thumbnails 
         /// at approximately 2, 4, and 6 minutes. This value must be a positive integer.
         /// </summary>
-        [DataMember(Name = "number")]
+        [JsonPropertyName("number")]
         public int? Number { get; set; }
 
         /// <summary>
@@ -23,10 +23,10 @@ namespace Zencoder.Models
         /// you’ll get back 12 thumbnails, each one on the minute. 
         /// This value must be a positive number.
         /// </summary>
-        [DataMember(Name = "interval")]
+        [JsonPropertyName("interval")]
         public int? Interval { get; set; }
 
-        [DataMember(Name = "start_at_first_frame")]
+        [JsonPropertyName("start_at_first_frame")]
         public bool? StartAtFirstFrame { get; set; }
 
         /// <summary>
@@ -34,31 +34,31 @@ namespace Zencoder.Models
         /// </summary>
         public bool? Public { get; set; }
 
-        [DataMember(Name = "size")]
+        [JsonPropertyName("size")]
         public string Size { get; set; }
 
-        [DataMember(Name = "base_url")]
+        [JsonPropertyName("base_url")]
         public string BaseUrl { get; set; }
 
-        [DataMember(Name = "prefix")]
+        [JsonPropertyName("prefix")]
         public string Prefix { get; set; }
 
-        [DataMember(Name = "aspect_mode")]
+        [JsonPropertyName("aspect_mode")]
         public string AspectMode { get; set; }
 
-        [DataMember(Name = "height")]
+        [JsonPropertyName("height")]
         public int? Height { get; set; }
 
-        [DataMember(Name = "width")]
+        [JsonPropertyName("width")]
         public int? Width { get; set; }
 
         /// <summary>
         /// {{number}}_{{width}}x{{height}}-thumbnail
         /// </summary>
-        [DataMember(Name = "filename")]
+        [JsonPropertyName("filename")]
         public string FileName { get; set; }
 
-        [DataMember(Name = "format")]
+        [JsonPropertyName("format")]
         public string Format { get; set; }
     }
 }

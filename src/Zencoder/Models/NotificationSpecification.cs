@@ -1,7 +1,7 @@
 ﻿#nullable disable
 
 using System;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
@@ -15,10 +15,10 @@ namespace Zencoder.Models
             Url = url ?? throw new ArgumentNullException(nameof(url));
         }
 
-        [DataMember(Name = "format")]
+        [JsonPropertyName("format")]
         public string Format { get; set; }
 
-        [DataMember(Name = "url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; set; }
 
         //  {"format": "xml", "url": "http://user:password@example.com/zencoder1"},

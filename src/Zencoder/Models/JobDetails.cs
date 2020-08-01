@@ -2,33 +2,33 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 using Carbon.Json;
 
 namespace Zencoder.Models
 {
-    public class JobDetails
+    public sealed class JobDetails
     {
-        [DataMember(Name = "id")]
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
-        [DataMember(Name = "input_media_file")]
+        [JsonPropertyName("input_media_file")]
         public InputMediaFile InputMediaFile { get; set; }
 
-        [DataMember(Name = "state")]
+        [JsonPropertyName("state")]
         public ZencoderJobState State { get; set; }
 
-        [DataMember(Name = "finished_at")]
+        [JsonPropertyName("finished_at")]
         public DateTime FinishedAt { get; set; }
 
-        [DataMember(Name = "created_at")]
+        [JsonPropertyName("created_at")]
         public DateTime CreatedAt { get; set; }
 
-        [DataMember(Name = "output_media_files")]
+        [JsonPropertyName("output_media_files")]
         public List<OutputMediaFile> OutputMediaFiles { get; set; }
 
-        [DataMember(Name = "thumbnails")]
+        [JsonPropertyName("thumbnails")]
         public List<Thumbnail> Thumbnails { get; set; }
 
         public static JobDetails ParseJSON(string text)
@@ -40,12 +40,8 @@ namespace Zencoder.Models
                 : json.As<JobDetails>();
         }
 
-        #region Helpers
-
-        [IgnoreDataMember]
+        [JsonIgnore]
         public bool IsFinished => State == ZencoderJobState.Finished;
-
-        #endregion
     }
 }
 

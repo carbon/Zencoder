@@ -1,94 +1,84 @@
 ﻿#nullable disable
 
 using System;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
     public class MediaFileBase
     {
-        [DataMember(Name = "state")]
+        [JsonPropertyName("state")]
         public ZencoderJobState State { get; set; }
 
-        [DataMember(Name = "format")]
+        [JsonPropertyName("format")]
         public string Format { get; set; }
 
-        [DataMember(Name = "error_message")]
+        [JsonPropertyName("error_message")]
         public string ErrorMessage { get; set; }
 
-        [DataMember(Name = "error_class")]
+        [JsonPropertyName("error_class")]
         public string ErrorClass { get; set; }
 
-        [DataMember(Name = "frame_rate")]
+        [JsonPropertyName("frame_rate")]
         public float FrameRate { get; set; }
 
-        [DataMember(Name = "width")]
+        [JsonPropertyName("width")]
         public int Width { get; set; }
 
-        [DataMember(Name = "height")]
+        [JsonPropertyName("height")]
         public int Height { get; set; }
 
-        [DataMember(Name = "duration_in_ms")]
+        [JsonPropertyName("duration_in_ms")]
         public long DurationInMs { get; set; }
 
-        [DataMember(Name = "video_codec")]
+        [JsonPropertyName("video_codec")]
         public string VideoCodec { get; set; }
 
-        [DataMember(Name = "audio_codec")]
+        [JsonPropertyName("audio_codec")]
         public string AudioCodec { get; set; }
 
-        [DataMember(Name = "audio_sample_rate")]
+        [JsonPropertyName("audio_sample_rate")]
         public int AudioSampleRate { get; set; }
 
-        [DataMember(Name = "total_bitrate_in_kbps")]
+        [JsonPropertyName("total_bitrate_in_kbps")]
         public int TotalBitrateInKbps { get; set; }
 
-        [DataMember(Name = "file_size_bytes")]
+        [JsonPropertyName("file_size_bytes")]
         public long FileSizeBytes { get; set; }
 
-        [DataMember(Name = "url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
-        #region Helpers
-
         // BASE 10
-        [IgnoreDataMember]
-        public int Bitrate
-            => (int)(((FileSizeBytes * 8) / 1000) / Duration.TotalSeconds);
+        [JsonIgnore]
+        public int Bitrate => (int)(((FileSizeBytes * 8) / 1000) / Duration.TotalSeconds);
 
-        [IgnoreDataMember]
-        public TimeSpan Duration
-            => TimeSpan.FromMilliseconds(DurationInMs);
+        [JsonIgnore]
+        public TimeSpan Duration => TimeSpan.FromMilliseconds(DurationInMs);
 
-        [IgnoreDataMember]
+        [JsonIgnore]
         public bool HasError => !string.IsNullOrEmpty(ErrorMessage) || !string.IsNullOrEmpty(ErrorClass);
-
-        #endregion
     }
 
     public sealed class InputMediaFile : MediaFileBase
     {
-        [DataMember(Name = "created_at")]
+        [JsonPropertyName("created_at")]
         public DateTime CreatedAt { get; set; }
     }
 
     public sealed class OutputMediaFile : MediaFileBase
     {
-        [DataMember(Name = "id")]
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
-        [DataMember(Name = "label")]
+        [JsonPropertyName("label")]
         public string Label { get; set; }
 
-        [DataMember(Name = "finished_at")]
+        [JsonPropertyName("finished_at")]
         public DateTime? FinishedAt { get; set; }
 
-        #region Helper Properties
-
-        [IgnoreDataMember]
+        [JsonIgnore]
         public bool IsFinished => State == ZencoderJobState.Finished;
-
-        #endregion
     }
 }
 

@@ -2,22 +2,21 @@
 
   <PropertyGroup>
     <AssemblyName>Zencoder</AssemblyName>
-    <VersionPrefix>2.1.0</VersionPrefix>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <VersionPrefix>2.2.1</VersionPrefix>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
     <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>
     
-    <!-- Package Properties -->
     <Authors>iamcarbon</Authors>
-    <Copyright>© 2010 - 2018 Jason Nelson</Copyright>
-    <Description>A netstandard client for the Zencoder v2 API.</Description>
+    <Copyright>© 2010 - 2020 Jason Nelson</Copyright>
+    <Description>A Zencoder v2 client.</Description>
     <PackageTags>zencoder async netstandard</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/carbon/Zencoder</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Carbon.Json" Version="2.1.0" />
+    <PackageReference Include="Carbon.Json" Version="2.4.0" />
   </ItemGroup>
   
 </Project>

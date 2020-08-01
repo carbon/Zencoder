@@ -1,6 +1,7 @@
 ﻿#nullable disable
 
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 using Carbon.Json;
 
@@ -8,10 +9,10 @@ namespace Zencoder.Models
 {
     public class Notification
     {
-        [DataMember(Name = "job")]
+        [JsonPropertyName("job")]
         public NotificationJob Job { get; set; }
 
-        [DataMember(Name = "output")]
+        [JsonPropertyName("output")]
         public OutputMediaFile Output { get; set; }
 
         public static Notification ParseJson(string jsonText)

@@ -1,28 +1,28 @@
 ﻿#nullable disable
 
 using System;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
     public class Thumbnail
     {
-        [DataMember(Name = "group_label")]
+        [JsonPropertyName("group_label")]
         public string GroupLabel { get; set; }
 
-        [DataMember(Name = "id")]
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
-        [DataMember(Name = "url")]
+        [JsonPropertyName("url")]
         public Uri Url { get; set; }
 
-        [DataMember(Name = "height")]
+        [JsonPropertyName("height")]
         public int Height { get; set; }
 
-        [DataMember(Name = "width")]
+        [JsonPropertyName("width")]
         public int Width { get; set; }
 
-        [DataMember(Name = "file_size_bytes")]
+        [JsonPropertyName("file_size_bytes")]
         public long FileSizeBytes { get; set; }
     }
 

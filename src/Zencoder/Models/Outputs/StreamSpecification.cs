@@ -1,21 +1,21 @@
 ﻿#nullable disable
 
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
-    public class StreamSpecification
+    public sealed class StreamSpecification
     {
-        [DataMember(Name = "source")]
+        [JsonPropertyName("source")]
         public string Source { get; set; }
 
-        [DataMember(Name = "path")]
+        [JsonPropertyName("path")]
         public string Path { get; set; }
 
-        [DataMember(Name = "bandwidth")]
+        [JsonPropertyName("bandwidth")]
         public int? Bandwidth { get; set; }
 
-        [DataMember(Name = "resolution")]
+        [JsonPropertyName("resolution")]
         public string Resolution { get; set; }
     }
 }

@@ -2,30 +2,31 @@
 
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
-    public class JobProgress
+    public sealed class JobProgress
     {
-        [DataMember(Name = "state")]
+		[JsonPropertyName("state")]
         public ZencoderJobState State { get; set; }
 
-        [DataMember(Name = "progress")]
+		[JsonPropertyName("progress")]
         public float Progress { get; set; }
 
-        [DataMember(Name = "input")]
+        [JsonPropertyName("input")]
         public JobProgressInput Input { get; set; }
 
-        [DataMember(Name = "outputs")]
+		[JsonPropertyName("outputs")]
         public List<OutputProgress> Outputs { get; set; }
     }
 
-    public class JobProgressInput
+    public sealed class JobProgressInput
     {
-        [DataMember(Name = "id")]
+		[JsonPropertyName("id")]
         public long Id { get; set; }
 
-        [DataMember(Name = "state")]
+		[JsonPropertyName("state")]
         public ZencoderJobState State { get; set; }
     }
 

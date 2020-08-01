@@ -1,27 +1,17 @@
-﻿#nullable disable
-
-using System.Runtime.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
     public class OutputProgress
     {
-        [DataMember(Name = "state")]
+        [JsonPropertyName("state")]
         public ZencoderJobState State { get; set; }
 
-        [DataMember(Name = "progress")]
+        [JsonPropertyName("progress")]
         public float Progress { get; set; }
 
-        [DataMember(Name = "current_event")]
-        public ZencoderEvent CurrentEvent { get; set; }
-    }
-
-    public enum ZencoderEvent
-    {
-        Inspecting  = 1,
-        Downloading = 2,
-        Transcoding = 3,
-        Uploading   = 4
+        [JsonPropertyName("current_event")]
+        public ZencoderEventType CurrentEvent { get; set; }
     }
 }
 

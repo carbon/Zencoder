@@ -1,6 +1,5 @@
 ﻿#nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -245,7 +244,7 @@ namespace Zencoder.Models
         [DataMember(Name = "notifications", EmitDefaultValue = false)]
         public List<NotificationSpecification> Notifications
         {
-            get { return _notifications ?? (_notifications = new List<NotificationSpecification>()); }
+            get { return _notifications ??= new List<NotificationSpecification>(); }
             set { _notifications = value; }
         }
 

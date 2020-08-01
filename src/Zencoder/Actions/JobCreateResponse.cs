@@ -1,7 +1,7 @@
 ﻿#nullable disable
 
 using System;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 using Carbon.Json;
 
@@ -9,8 +9,10 @@ namespace Zencoder.Models
 {
     public class JobCreateResponse
     {
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
+        [JsonPropertyName("outputs")]
         public OutputInfo[] Outputs { get; set; }
 
         public static JobCreateResponse Parse(string jsonText)
@@ -40,10 +42,10 @@ namespace Zencoder.Models
 
         public class OutputInfo
         {
-            [DataMember(Name = "id")]
+            [JsonPropertyName("id")]
             public long Id { get; set; }
 
-            [DataMember(Name = "url")]
+            [JsonPropertyName("url")]
             public string Url { get; set; }
         }
     }

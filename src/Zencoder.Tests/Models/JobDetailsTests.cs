@@ -360,7 +360,7 @@ namespace Zencoder.Models.Tests
             var input = job.InputMediaFile;
 
             Assert.Equal("mpeg4", input.Format);
-            Assert.Equal(null, input.ErrorMessage);
+            Assert.Null(input.ErrorMessage);
             Assert.Equal("UnsupportedCodecError", input.ErrorClass);
             Assert.Equal("pcm_s16le", input.AudioCodec);
             Assert.Equal("apple intermediate codec", input.VideoCodec);
@@ -899,7 +899,7 @@ state: ""finished""
             var input = job.InputMediaFile;
 
             Assert.False(input.HasError);
-            Assert.Equal(1, job.OutputMediaFiles.Count);
+            Assert.Single(job.OutputMediaFiles);
 
             var output = job.OutputMediaFiles[0];
 
@@ -933,7 +933,7 @@ state: ""finished""
             Assert.Equal(240, input.Height);
             Assert.Equal(320, input.Width);
             Assert.Equal(48000, input.AudioSampleRate);
-            Assert.Equal(null, input.ErrorMessage);
+            Assert.Null(input.ErrorMessage);
             Assert.Equal("http://media.cmcdn.net/7265014.mov", input.Url);
         }
 

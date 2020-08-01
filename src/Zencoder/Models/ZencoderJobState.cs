@@ -1,5 +1,8 @@
-﻿namespace Zencoder.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Zencoder.Models
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ZencoderJobState
     {
         Unknown = 0,
