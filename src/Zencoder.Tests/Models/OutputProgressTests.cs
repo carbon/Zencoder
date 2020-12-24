@@ -1,4 +1,4 @@
-﻿using Carbon.Json;
+﻿using System.Text.Json;
 
 using Xunit;
 
@@ -11,7 +11,7 @@ namespace Zencoder.Models.Tests
         {
             string text = @"{""current_event"":""Uploading"",""state"":""finished""}";
 
-            var progress = JsonObject.Parse(text).As<OutputProgress>();
+            var progress = JsonSerializer.Deserialize<OutputProgress>(text);
 
             Assert.Equal(ZencoderEventType.Uploading, progress.CurrentEvent);
             Assert.Equal(ZencoderJobState.Finished, progress.State);
@@ -20,7 +20,7 @@ namespace Zencoder.Models.Tests
         [Fact]
         public void Parse2()
         {
-            var progress = JsonObject.Parse(@"{""state"": ""processing"",""current_event"": ""Transcoding"",""progress"": 32.34567345}").As<OutputProgress>();
+            var progress = JsonSerializer.Deserialize<OutputProgress>(@"{""state"": ""processing"",""current_event"": ""Transcoding"",""progress"": 32.34567345}");
 
             Assert.Equal(ZencoderJobState.Processing, progress.State);
             Assert.Equal(32.34567D, progress.Progress, 5);

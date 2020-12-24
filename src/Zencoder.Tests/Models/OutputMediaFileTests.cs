@@ -1,4 +1,4 @@
-﻿using Carbon.Json;
+﻿using System.Text.Json;
 
 using Xunit;
 
@@ -31,7 +31,7 @@ namespace Zencoder.Models.Tests
   ""md5_checksum"": ""7f106918e02a69466afa0ee014174143""
 }";
 
-            var output = JsonObject.Parse(json).As<OutputMediaFile>();
+            var output = JsonSerializer.Deserialize<OutputMediaFile>(json);
 
             Assert.Equal("mpeg4", output.Format);
             Assert.Equal(ZencoderJobState.Finished, output.State);
@@ -59,18 +59,23 @@ namespace Zencoder.Models.Tests
  ""format"": ""mpeg4"",
  ""width"": 768,
  ""height"": 432,
- ""url"": ""http://cmtemp.s3.amazonaws.com/eab7d5f990ac4108bfb855770d406506.mp4""
+ ""url"": ""http://cmtemp.s3.amazonaws.com/a.mp4""
 }";
 
 
-            var output = JsonObject.Parse(json).As<OutputMediaFile>();
+            var output = JsonSerializer.Deserialize<OutputMediaFile>(json);
 
             Assert.Null(output.ErrorMessage);
-            Assert.Equal(29D, output.FrameRate);
+            Assert.Null(output.Label);
+            Assert.Equal(28864, output.DurationInMs);
+            Assert.Equal(29f, output.FrameRate);
+            Assert.Equal("aac", output.AudioCodec);
             Assert.Equal("h264", output.VideoCodec);
             Assert.Equal(768, output.Width);
             Assert.Equal(432, output.Height);
-            Assert.Equal("http://cmtemp.s3.amazonaws.com/eab7d5f990ac4108bfb855770d406506.mp4", output.Url);
+            Assert.Equal(5923771, output.FileSizeBytes);
+
+            Assert.Equal("http://cmtemp.s3.amazonaws.com/a.mp4", output.Url);
         }
     }
 }

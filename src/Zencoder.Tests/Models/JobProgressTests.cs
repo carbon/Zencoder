@@ -1,6 +1,6 @@
-﻿using Carbon.Json;
+﻿using Xunit;
 
-using Xunit;
+using System.Text.Json;
 
 namespace Zencoder.Models.Tests
 {
@@ -34,7 +34,7 @@ namespace Zencoder.Models.Tests
   ]
 }";
 
-            var progress = JsonObject.Parse(text).As<JobProgress>();
+            var progress = JsonSerializer.Deserialize<JobProgress>(text);
 
 
             Assert.Equal(2, progress.Outputs.Count);

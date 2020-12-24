@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using Carbon.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Xunit;
 
@@ -9,6 +8,11 @@ namespace Zencoder.Models.Tests
 {
     public class JobCreateRequestTests
     {
+        private static readonly JsonSerializerOptions jso = new JsonSerializerOptions  {
+            WriteIndented = true,
+            IgnoreNullValues = true
+        };
+
         [Fact]
         public void Test1()
         {
@@ -27,42 +31,43 @@ namespace Zencoder.Models.Tests
                         Speed = 1,
                         Public = true,
                         VideoCodec = "vp8",
-                        Notifications = {
+                        Notifications = new[] {
                             new NotificationSpecification("json", new Uri("http://google.com/"))
                         }
                     }
                 }
             };
 
+           
+
             Assert.Equal(@"{
   ""api_key"": ""x"",
   ""input"": ""http://google.com/test.mp4"",
   ""outputs"": [
     {
-      ""public"": true,
-      ""notifications"": [
-        {
-          ""format"": ""json"",
-          ""url"": ""http://google.com/""
-        }
-      ],
       ""label"": ""Square"",
       ""url"": ""http://google.com/test2.mp4"",
       ""video_codec"": ""vp8"",
       ""width"": 100,
       ""height"": 100,
       ""quality"": 5,
-      ""speed"": 1
+      ""speed"": 1,
+      ""public"": true,
+      ""notifications"": [
+        {
+          ""format"": ""json"",
+          ""url"": ""http://google.com/""
+        }
+      ]
     }
   ]
-}", JsonObject.FromObject(job).ToString());
+}", JsonSerializer.Serialize(job, jso));
         }
 
         [Fact]
         public void Test2()
         {
-            var job = new JobCreateRequest
-            {
+            var job = new JobCreateRequest {
                 Input = "http://media.cmcdn.net/7265014.mov",
                 Outputs = {
                     new OutputSpecification {
@@ -70,8 +75,8 @@ namespace Zencoder.Models.Tests
                         Height = 432,
                         Quality = 3,
                         Speed = 2,
-                        Notifications = new List<NotificationSpecification> {
-                            new NotificationSpecification { Format = "json", Url = new Uri("http://platform.carbonmade.net/zencoder/notifications/recieve") }
+                        Notifications = new NotificationSpecification[] {
+                            new () { Format = "json", Url = new Uri("http://platform.carbonmade.net/zencoder/notifications/recieve") }
                         }
                     }
                 }
@@ -81,19 +86,19 @@ namespace Zencoder.Models.Tests
   ""input"": ""http://media.cmcdn.net/7265014.mov"",
   ""outputs"": [
     {
+      ""width"": 768,
+      ""height"": 432,
+      ""quality"": 3,
+      ""speed"": 2,
       ""notifications"": [
         {
           ""format"": ""json"",
           ""url"": ""http://platform.carbonmade.net/zencoder/notifications/recieve""
         }
-      ],
-      ""width"": 768,
-      ""height"": 432,
-      ""quality"": 3,
-      ""speed"": 2
+      ]
     }
   ]
-}", job.ToJson().ToString());
+}", JsonSerializer.Serialize(job, jso));
         }
 
 
@@ -196,10 +201,10 @@ namespace Zencoder.Models.Tests
                         StreamingDeliveryFormat = "dash",
                         Type = "playlist",
                         Url = "s3://mybucket/full-examples/dash/manifest.mpd",
-                        Streams = {
-                            new StreamSpecification { Source = "dash-1500k", Path = "1500k" },
-                            new StreamSpecification { Source = "dash-1000k", Path = "1000k" },
-                            new StreamSpecification { Source = "dash-500k",  Path = "500k" }
+                        Streams = new StreamSpecification[] {
+                            new () { Source = "dash-1500k", Path = "1500k" },
+                            new () { Source = "dash-1000k", Path = "1000k" },
+                            new () { Source = "dash-500k",  Path = "500k" }
                         }
                     }
                 }
@@ -210,85 +215,95 @@ namespace Zencoder.Models.Tests
   ""input"": ""http://s3.amazonaws.com/zencodertesting/test.mov"",
   ""outputs"": [
     {
-      ""prepare_for_segmenting"": [ ""hls"", ""dash"" ],
       ""label"": ""mp4-1500k"",
       ""url"": ""s3://mybucket/full-examples/mp4/1500.mp4"",
       ""size"": ""1280x720"",
       ""video_bitrate"": 1100,
       ""audio_bitrate"": 128,
       ""decoder_bitrate_cap"": 1222,
-      ""decoder_buffer_size"": 1833
+      ""decoder_buffer_size"": 1833,
+      ""prepare_for_segmenting"": [
+        ""hls"",
+        ""dash""
+      ]
     },
     {
-      ""prepare_for_segmenting"": [ ""hls"", ""dash"" ],
       ""label"": ""mp4-1000k"",
       ""url"": ""s3://mybucket/full-examples/mp4/1000.mp4"",
       ""size"": ""960x540"",
       ""video_bitrate"": 695,
       ""audio_bitrate"": 128,
       ""decoder_bitrate_cap"": 772,
-      ""decoder_buffer_size"": 1158
+      ""decoder_buffer_size"": 1158,
+      ""prepare_for_segmenting"": [
+        ""hls"",
+        ""dash""
+      ]
     },
     {
-      ""prepare_for_segmenting"": [ ""hls"", ""dash"" ],
       ""label"": ""mp4-500k"",
       ""url"": ""s3://mybucket/full-examples/mp4/500.mp4"",
       ""size"": ""640x360"",
       ""video_bitrate"": 290,
       ""audio_bitrate"": 128,
       ""decoder_bitrate_cap"": 322,
-      ""decoder_buffer_size"": 483
+      ""decoder_buffer_size"": 483,
+      ""prepare_for_segmenting"": [
+        ""hls"",
+        ""dash""
+      ]
     },
     {
       ""type"": ""segmented"",
+      ""url"": ""s3://mybucket/full-examples/hls/1500.m3u8"",
       ""source"": ""mp4-1500k"",
       ""copy_audio"": true,
-      ""copy_video"": true,
-      ""url"": ""s3://mybucket/full-examples/hls/1500.m3u8""
+      ""copy_video"": true
     },
     {
       ""type"": ""segmented"",
+      ""url"": ""s3://mybucket/full-examples/hls/1000.m3u8"",
       ""source"": ""mp4-1000k"",
       ""copy_audio"": true,
-      ""copy_video"": true,
-      ""url"": ""s3://mybucket/full-examples/hls/1000.m3u8""
+      ""copy_video"": true
     },
     {
       ""type"": ""segmented"",
+      ""url"": ""s3://mybucket/full-examples/hls/500.m3u8"",
       ""source"": ""mp4-500k"",
       ""copy_audio"": true,
-      ""copy_video"": true,
-      ""url"": ""s3://mybucket/full-examples/hls/500.m3u8""
+      ""copy_video"": true
     },
     {
       ""type"": ""segmented"",
-      ""source"": ""mp4-1500k"",
-      ""copy_audio"": true,
-      ""copy_video"": true,
-      ""streaming_delivery_format"": ""dash"",
       ""label"": ""dash-1500k"",
-      ""url"": ""s3://mybucket/full-examples/dash/1500k/rendition.mpd""
+      ""url"": ""s3://mybucket/full-examples/dash/1500k/rendition.mpd"",
+      ""source"": ""mp4-1500k"",
+      ""copy_audio"": true,
+      ""copy_video"": true,
+      ""streaming_delivery_format"": ""dash""
     },
     {
       ""type"": ""segmented"",
+      ""label"": ""dash-1000k"",
+      ""url"": ""s3://mybucket/full-examples/dash/1000k/rendition.mpd"",
       ""source"": ""mp4-1000k"",
       ""copy_audio"": true,
       ""copy_video"": true,
-      ""streaming_delivery_format"": ""dash"",
-      ""label"": ""dash-1000k"",
-      ""url"": ""s3://mybucket/full-examples/dash/1000k/rendition.mpd""
+      ""streaming_delivery_format"": ""dash""
     },
     {
       ""type"": ""segmented"",
+      ""label"": ""dash-500k"",
+      ""url"": ""s3://mybucket/full-examples/dash/500k/rendition.mpd"",
       ""source"": ""mp4-500k"",
       ""copy_audio"": true,
       ""copy_video"": true,
-      ""streaming_delivery_format"": ""dash"",
-      ""label"": ""dash-500k"",
-      ""url"": ""s3://mybucket/full-examples/dash/500k/rendition.mpd""
+      ""streaming_delivery_format"": ""dash""
     },
     {
       ""type"": ""playlist"",
+      ""url"": ""s3://mybucket/full-examples/dash/manifest.mpd"",
       ""streaming_delivery_format"": ""dash"",
       ""streams"": [
         {
@@ -303,11 +318,10 @@ namespace Zencoder.Models.Tests
           ""source"": ""dash-500k"",
           ""path"": ""500k""
         }
-      ],
-      ""url"": ""s3://mybucket/full-examples/dash/manifest.mpd""
+      ]
     }
   ]
-}", job.ToJson().ToString());
+}", JsonSerializer.Serialize(job, jso));
         }
 
     }
