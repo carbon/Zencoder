@@ -2,15 +2,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
-using Carbon.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
     public sealed class JobDetails
     {
         [JsonPropertyName("id")]
+        [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
         public long Id { get; set; }
 
         [JsonPropertyName("input_media_file")]
@@ -20,7 +21,7 @@ namespace Zencoder.Models
         public ZencoderJobState State { get; set; }
 
         [JsonPropertyName("finished_at")]
-        public DateTime FinishedAt { get; set; }
+        public DateTime? FinishedAt { get; set; }
 
         [JsonPropertyName("created_at")]
         public DateTime CreatedAt { get; set; }
@@ -31,17 +32,29 @@ namespace Zencoder.Models
         [JsonPropertyName("thumbnails")]
         public List<Thumbnail> Thumbnails { get; set; }
 
-        public static JobDetails ParseJSON(string text)
+        public static JobDetails ParseJson(string text)
         {
-            var json = JsonObject.Parse(text);
+            // @"{""job"":{
+        
+            if (text.Contains("\"job\":"))
+            {
+                return JsonSerializer.Deserialize<WrappedJobDetails>(text)!.Job;
+            }
 
-            return (json.ContainsKey("job"))
-                ? json["job"].As<JobDetails>()
-                : json.As<JobDetails>();
+            return JsonSerializer.Deserialize<JobDetails>(text)!;
         }
 
         [JsonIgnore]
         public bool IsFinished => State == ZencoderJobState.Finished;
+
+        [JsonIgnore]
+        public bool IsSkipped => State == ZencoderJobState.Skipped;
+    }
+
+    internal sealed class WrappedJobDetails
+    {
+        [JsonPropertyName("job")]
+        public JobDetails Job { get; set; }
     }
 }
 

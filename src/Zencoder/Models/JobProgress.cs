@@ -1,7 +1,6 @@
 ﻿#nullable disable
 
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
@@ -24,6 +23,7 @@ namespace Zencoder.Models
     public sealed class JobProgressInput
     {
 		[JsonPropertyName("id")]
+		[JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
         public long Id { get; set; }
 
 		[JsonPropertyName("state")]

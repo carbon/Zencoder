@@ -5,16 +5,20 @@ using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
-    public class Thumbnail
+    public sealed class Thumbnail
     {
         [JsonPropertyName("group_label")]
         public string GroupLabel { get; set; }
 
         [JsonPropertyName("id")]
+        [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
         public long Id { get; set; }
 
         [JsonPropertyName("url")]
         public Uri Url { get; set; }
+
+        [JsonPropertyName("format")]
+        public string Format { get; set; }
 
         [JsonPropertyName("height")]
         public int Height { get; set; }

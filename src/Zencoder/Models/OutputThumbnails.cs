@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
-    public class OutputThumbnails
+    public sealed class OutputThumbnails
     {
         /// <summary>
         /// A number of thumbnails to capture. 

@@ -1,7 +1,6 @@
 ﻿#nullable disable
 
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
@@ -12,20 +11,25 @@ namespace Zencoder.Models
         /// <summary>
         /// The type of file to output.
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = false)]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
+#nullable enable
         /// <summary>
         /// An optional label for this output.
         /// </summary>
-        [DataMember(Name = "label", EmitDefaultValue = false)]
-        public string Label { get; set; }
+        [JsonPropertyName("label")]
+        public string? Label { get; set; }
+
+#nullable disable
 
         /// <summary>
         /// A S3, Cloud Files, GCS, FTP, FTPS, SFTP, Aspera, Azure, HTTP, or RTMP URL where we'll put the transcoded file.
         /// </summary>
-        [DataMember(Name = "url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
+
+#nullable enable
 
         #endregion
 
@@ -35,21 +39,21 @@ namespace Zencoder.Models
         /// Determined by the output filename and then video or audio codec. 
         /// Otherwise: mp4 (for standard outputs); ts (for segmented outputs).	
         /// </summary>
-        [DataMember(Name = "format", EmitDefaultValue = false)]
-        public string Format { get; set; }
+        [JsonPropertyName("format")]
+        public string? Format { get; set; }
 
         /// <summary>
         /// The output video codec to use. 
         /// Supported: h264 (default), theora, vp6, vp8, mpeg4, and wmv
         /// </summary>
-        [DataMember(Name = "video_codec", EmitDefaultValue = false)]
-        public string VideoCodec { get; set; }
+        [JsonPropertyName("video_codec")]
+        public string? VideoCodec { get; set; }
 
         /// <summary>
         /// Supported: aac, ac3, amr, eac3, mp3, pcm, vorbis, and wma
         /// </summary>
-        [DataMember(Name = "audio_codec", EmitDefaultValue = false)]
-        public string AudioCodec { get; set; }
+        [JsonPropertyName("audio_codec")]
+        public string? AudioCodec { get; set; }
 
         #endregion
 
@@ -58,19 +62,19 @@ namespace Zencoder.Models
         /// <summary>
         /// The resolution of the output video (WxH, in pixels).
         /// </summary>
-        [DataMember(Name = "size", EmitDefaultValue = false)]
-        public string Size { get; set; }
+        [JsonPropertyName("size")]
+        public string? Size { get; set; }
 
-        [DataMember(Name = "width", EmitDefaultValue = false)]
+        [JsonPropertyName("width")]
         public int? Width { get; set; }
 
-        [DataMember(Name = "height", EmitDefaultValue = false)]
+        [JsonPropertyName("height")]
         public int? Height { get; set; }
 
         /// <summary>
         /// Upscale the output if the input is smaller than the target output resolution.
         /// </summary>
-        [DataMember(Name = "upscale", EmitDefaultValue = false)]
+        [JsonPropertyName("upscale")]
         public bool? Upscale { get; set; }
 
         // AspectMode
@@ -91,12 +95,11 @@ namespace Zencoder.Models
 		audio_constant_bitrate	false	Enable constant bitrate mode for audio if possible.
 		*/
 
-
         /// <summary>
         /// quality: the desired output video quality, from 1 to 5.
         /// Default: 3.
         /// </summary>
-        [DataMember(Name = "quality", EmitDefaultValue = false)]
+        [JsonPropertyName("quality")]
         public int? Quality { get; set; }
 
         /// <summary>
@@ -105,28 +108,28 @@ namespace Zencoder.Models
         /// In general, we recommend either 2 or 4. 1-3 often result in similar file sizes, while 2-3 are generally about the same speed, so 2 is a good compromise. 
         /// On the high end, 5 often results in significantly larger files, but is not much faster than 4.
         /// </summary>
-        [DataMember(Name = "speed", EmitDefaultValue = false)]
+        [JsonPropertyName("speed")]
         public int? Speed { get; set; }
 
         /// <summary>
         /// A target video bitrate in kbps. Not necessary if you select a quality setting, unless you want to target a specific bitrate.
         /// </summary>
-        [DataMember(Name = "video_bitrate", EmitDefaultValue = false)]
+        [JsonPropertyName("video_bitrate")]
         public int? VideoBitrate { get; set; }
 
         /// <summary>
         /// max_video_bitrate
         /// </summary>
-        [DataMember(Name = "max_video_bitrate", EmitDefaultValue = false)]
+        [JsonPropertyName("max_video_bitrate")]
         public int? MaxVideoBitrate { get; set; }
 
-        [DataMember(Name = "audio_bitrate", EmitDefaultValue = false)]
+        [JsonPropertyName("audio_bitrate")]
         public int? AudioBitrate { get; set; }
 
-        [DataMember(Name = "decoder_bitrate_cap", EmitDefaultValue = false)]
+        [JsonPropertyName("decoder_bitrate_cap")]
         public int? DecoderBitrateCap { get; set; }
 
-        [DataMember(Name = "decoder_buffer_size", EmitDefaultValue = false)]
+        [JsonPropertyName("decoder_buffer_size")]
         public int? DecoderBufferSize { get; set; }
 
         #endregion
@@ -146,13 +149,13 @@ namespace Zencoder.Models
 		frame_index_filename		none						Override the default filename for the frame index when generate_frame_index is enabled.
 		*/
 
-        [DataMember(Name = "frame_rate", EmitDefaultValue = false)]
+        [JsonPropertyName("frame_rate")]
         public double? FrameRate { get; set; }
 
-        [DataMember(Name = "max_frame_rate", EmitDefaultValue = false)]
+        [JsonPropertyName("max_frame_rate")]
         public double? MaxFrameRate { get; set; }
 
-        [DataMember(Name = "keyframe_interval", EmitDefaultValue = false)]
+        [JsonPropertyName("keyframe_interval")]
         public int? KeyframeInterval { get; set; }
 
         #endregion
@@ -167,20 +170,22 @@ namespace Zencoder.Models
 		color_metadata			preserve	Preserve or discard color metadata information from the input in the output video.
 		*/
 
-        [DataMember(Name = "video_reference_frames", EmitDefaultValue = false)]
+        [JsonPropertyName("video_reference_frames")]
         public int? VideoReferenceFrames { get; set; }
 
-        [DataMember(Name = "video_codec_profile", EmitDefaultValue = false)]
-        public string VideoCodecProfile { get; set; }
+        [JsonPropertyName("video_codec_profile")]
+        public string? VideoCodecProfile { get; set; }
 
-        [DataMember(Name = "video_codec_level", EmitDefaultValue = false)]
-        public string VideoCodecLevel { get; set; }
+        [JsonPropertyName("video_codec_level")]
+        public string? VideoCodecLevel { get; set; }
 
-        [DataMember(Name = "video_bframes", EmitDefaultValue = false)]
+        [JsonPropertyName("video_bframes")]
         public int? VideoBFrames { get; set; }
 
-        [DataMember(Name = "color_metadata", EmitDefaultValue = false)]
-        public string ColorMetadata { get; set; }
+#nullable enable
+
+        [JsonPropertyName("color_metadata")]
+        public string? ColorMetadata { get; set; }
 
         #endregion
 
@@ -194,27 +199,27 @@ namespace Zencoder.Models
 		audio_language			none	Describes the language of the audio track.
 		*/
 
-        [DataMember(Name = "audio_sample_rate", EmitDefaultValue = false)]
+        [JsonPropertyName("audio_sample_rate")]
         public int? AudioSampleRate { get; set; }
 
-        [DataMember(Name = "max_audio_sample_rate", EmitDefaultValue = false)]
+        [JsonPropertyName("max_audio_sample_rate")]
         public int? MaxSampleRate { get; set; }
 
-        [DataMember(Name = "audio_channels", EmitDefaultValue = false)]
+        [JsonPropertyName("audio_channels")]
         public int? AudioChannels { get; set; }
 
-        [DataMember(Name = "audio_bit_depth", EmitDefaultValue = false)]
+        [JsonPropertyName("audio_bit_depth")]
         public int? AudioBitDepth { get; set; }
 
-        [DataMember(Name = "audio_language", EmitDefaultValue = false)]
-        public string AudioLanguage { get; set; }
+        [JsonPropertyName("audio_language")]
+        public string? AudioLanguage { get; set; }
 
         #endregion
 
         #region Thumbnails
 
-        [DataMember(Name = "thumbnails", EmitDefaultValue = false)]
-        public OutputThumbnails Thumbnails { get; set; }
+        [JsonPropertyName("thumbnails")]
+        public OutputThumbnails? Thumbnails { get; set; }
 
         #endregion
 
@@ -232,69 +237,61 @@ namespace Zencoder.Models
 
         #region S3 Settings
 
-        [DataMember(Name = "public", EmitDefaultValue = false)]
+        [JsonPropertyName("public")]
         public bool? Public { get; set; }
 
         #endregion
 
         #region Notifications
 
-        private List<NotificationSpecification> _notifications;
-
-        [DataMember(Name = "notifications", EmitDefaultValue = false)]
-        public List<NotificationSpecification> Notifications
-        {
-            get { return _notifications ??= new List<NotificationSpecification>(); }
-            set { _notifications = value; }
-        }
+        [JsonPropertyName("notifications")]
+        public NotificationSpecification[]? Notifications { get; set; }
 
         #endregion
 
         #region Conditional Outputs
 
-        [DataMember(Name = "skip", EmitDefaultValue = false)]
-        public EncodeConditions Skip { get; set; }
+        [JsonPropertyName("skip")]
+        public EncodeConditions? Skip { get; set; }
 
         #endregion
 
         #region Segmented Streaming
 
-        [DataMember(Name = "source", EmitDefaultValue = false)]
+#nullable disable
+
+        [JsonPropertyName("source")]
         public string Source { get; set; }
 
-        [DataMember(Name = "copy_audio", EmitDefaultValue = false)]
+#nullable enable
+
+        [JsonPropertyName("copy_audio")]
         public bool? CopyAudio { get; set; }
 
-        [DataMember(Name = "copy_video", EmitDefaultValue = false)]
+        [JsonPropertyName("copy_video")]
         public bool? CopyVideo { get; set; }
 
-        [DataMember(Name = "segment_seconds", EmitDefaultValue = false)]
+        [JsonPropertyName("segment_seconds")]
         public int? SegmentSeconds { get; set; }
 
-        [DataMember(Name = "generate_keyframe_manifest", EmitDefaultValue = false)]
+        [JsonPropertyName("generate_keyframe_manifest")]
         public bool? GenerateKeyframeManifest { get; set; }
 
-        [DataMember(Name = "allow_skipped_sources", EmitDefaultValue = false)]
+        [JsonPropertyName("allow_skipped_sources")]
         public bool? AllowSkippedSources { get; set; }
 
         #endregion
 
         #region Streaming
 
-        [DataMember(Name = "streaming_delivery_format", EmitDefaultValue = false)]
-        public string StreamingDeliveryFormat { get; set; }
+        [JsonPropertyName("streaming_delivery_format")]
+        public string? StreamingDeliveryFormat { get; set; }
 
-        [DataMember(Name = "prepare_for_segmenting", EmitDefaultValue = false)]
-        public string[] PrepareForSegmenting { get; set; }
+        [JsonPropertyName("prepare_for_segmenting")]
+        public string[]? PrepareForSegmenting { get; set; }
 
-        private List<StreamSpecification> _streams;
-
-        [DataMember(Name = "streams", EmitDefaultValue = false)]
-        public List<StreamSpecification> Streams
-        {
-            get { return _streams ?? (_streams = new List<StreamSpecification>()); }
-            set { _streams = value; }
-        }
+        [JsonPropertyName("streams")]
+        public StreamSpecification[]? Streams { get; set; }
 
         #endregion
 
@@ -309,18 +306,18 @@ namespace Zencoder.Models
 		crf						none		Bitrate control setting.
 		*/
 
-        [DataMember(Name = "h264_reference_frames", EmitDefaultValue = false)]
+        [JsonPropertyName("h264_reference_frames")]
         public int? H264ReferenceFrames { get; set; }
 
         /// <summary>
         /// default: baseline
         /// options: baseline, main, high
         /// </summary>
-        [DataMember(Name = "h264_profile", EmitDefaultValue = false)]
-        public string H264Profile { get; set; }
+        [JsonPropertyName("h264_profile")]
+        public string? H264Profile { get; set; }
 
-        [DataMember(Name = "h264_level", EmitDefaultValue = false)]
-        public string H264Level { get; set; }
+        [JsonPropertyName("h264_level")]
+        public string? H264Level { get; set; }
 
         #endregion
     }

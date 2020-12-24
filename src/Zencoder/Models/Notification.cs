@@ -1,32 +1,28 @@
 ﻿#nullable disable
 
-using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-
-using Carbon.Json;
 
 namespace Zencoder.Models
 {
-    public class Notification
+    public sealed class Notification
     {
         [JsonPropertyName("job")]
         public NotificationJob Job { get; set; }
 
         [JsonPropertyName("output")]
         public OutputMediaFile Output { get; set; }
-
-        public static Notification ParseJson(string jsonText)
-        {
-            return JsonObject.Parse(jsonText).As<Notification>();
-        }
     }
 
-    public class NotificationJob
+    public sealed class NotificationJob
     {
+        [JsonPropertyName("id")]
+        [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
         public long Id { get; set; }
 
+        [JsonPropertyName("test")]
         public bool Test { get; set; }
 
+        [JsonPropertyName("state")]
         public ZencoderJobState State { get; set; }
     }
 }

@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
-    public class NotificationSpecification
+    public sealed class NotificationSpecification
     {
         public NotificationSpecification() { }
 
-        public NotificationSpecification(string format, Uri url)
+        public NotificationSpecification(string format, string url)
         {
             Format = format;
             Url = url ?? throw new ArgumentNullException(nameof(url));
@@ -19,7 +19,7 @@ namespace Zencoder.Models
         public string Format { get; set; }
 
         [JsonPropertyName("url")]
-        public Uri Url { get; set; }
+        public string Url { get; set; }
 
         //  {"format": "xml", "url": "http://user:password@example.com/zencoder1"},
     }

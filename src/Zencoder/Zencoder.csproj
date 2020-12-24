@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <AssemblyName>Zencoder</AssemblyName>
-    <VersionPrefix>2.2.1</VersionPrefix>
-    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
-    <LangVersion>8</LangVersion>
+    <VersionPrefix>2.5.3</VersionPrefix>
+    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+    <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
     
     <Authors>iamcarbon</Authors>
@@ -15,8 +15,12 @@
     <RepositoryUrl>https://github.com/carbon/Zencoder</RepositoryUrl>
   </PropertyGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="System.Text.Json" Version="5.0.0" />
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Carbon.Json" Version="2.4.0" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   
 </Project>

@@ -3,26 +3,32 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-using Carbon.Json;
-
 namespace Zencoder.Models
 {
     public sealed class JobCreateRequest
     {
-        private static readonly SerializationOptions options = new SerializationOptions {
-            IgnoreNullValues = true
-        };
-
         [JsonPropertyName("api_key")]
         public string ApiKey { get; set; }
 
 		[JsonPropertyName("input")]
         public string Input { get; set; }
 
-		[JsonPropertyName("outputs")]
-        public List<OutputSpecification> Outputs { get; } = new List<OutputSpecification>();
+#nullable enable
 
-        public JsonNode ToJson() => new JsonSerializer().Serialize(this, options);
+		// e.g. "us-virginia"
+		[JsonPropertyName("region")]
+		public string? Region { get; set; }
+
+		[JsonPropertyName("test")]
+		public bool? Test { get; set; }
+
+		[JsonPropertyName("credentials")]
+		public string? Credentials { get; set; }
+
+#nullable disable
+
+		[JsonPropertyName("outputs")]
+        public List<OutputSpecification> Outputs { get; } = new ();
     }
 }
 

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
-
-using Carbon.Json;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 using Zencoder.Models;
 
@@ -17,6 +16,10 @@ namespace Zencoder
 
         private readonly HttpClient httpClient;
 
+        private static readonly JsonSerializerOptions jso = new () {
+            IgnoreNullValues = true
+
+        };
         public ZencoderClient(string apiKey)
             : this(apiKey, new HttpClient()) { }
 
@@ -26,18 +29,30 @@ namespace Zencoder
             this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
-        public async Task<JobCreateResponse> CreateJobAsync(JobCreateRequest request)
+        public async Task<CreateJobResult> CreateJobAsync(JobCreateRequest request)
         {
             request.ApiKey = apiKey;
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, baseUri + "/jobs")
-            {
-                Content = new StringContent(request.ToJson().ToString(), Encoding.UTF8, "application/json")
+            byte[] jsonUtf8 = JsonSerializer.SerializeToUtf8Bytes(request, jso);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, baseUri + "/jobs") {
+                Content = new ByteArrayContent(jsonUtf8) {
+                    Headers = {
+                        { "Content-Type", "application/json; charset=utf-8" }
+                    }
+                }
             };
 
-            var responseText = await SendAsync(httpRequest).ConfigureAwait(false);
+            var result = await SendAsync<CreateJobResult>(httpRequest).ConfigureAwait(false);
 
-            return JobCreateResponse.Parse(responseText);
+            if (result.Errors is { Length: > 0 })
+            {
+                // {"errors":["Speed must be a number between 1 and 5."]}
+
+                throw new Exception(result.Errors[0]);
+            }
+
+            return result;
         }
 
         public async Task<JobDetails> GetJobDetailsAsync(long jobId)
@@ -48,7 +63,7 @@ namespace Zencoder
 
             var responseText = await SendAsync(httpRequest).ConfigureAwait(false);
 
-            return JobDetails.ParseJSON(responseText);
+            return JobDetails.ParseJson(responseText);
         }
 
         public async Task<JobProgress> GetJobProgressAsync(long jobId)
@@ -57,9 +72,7 @@ namespace Zencoder
                 requestUri: $"{baseUri}/jobs/{jobId}/progress?api_key={apiKey}"
             );
 
-            var responseText = await SendAsync(httpRequest).ConfigureAwait(false);
-
-            return Parse<JobProgress>(responseText);
+            return await SendAsync<JobProgress>(httpRequest).ConfigureAwait(false);
         }
 
         public async Task<OutputProgress> GetJobOutputProgressAsync(long outputId)
@@ -68,24 +81,24 @@ namespace Zencoder
                 requestUri: $"{baseUri}/outputs/{outputId}/progress?api_key={apiKey}"
             );
 
-            var responseText = await SendAsync(httpRequest).ConfigureAwait(false);
-
-            return Parse<OutputProgress>(responseText);
+            return await SendAsync<OutputProgress>(httpRequest).ConfigureAwait(false);
         }
 
         #region Helpers
-
-        private static T Parse<T>(string text)
-            where T : new()
-        {
-            return JsonObject.Parse(text).As<T>();
-        }
 
         private async Task<string> SendAsync(HttpRequestMessage httpRequest)
         {
             using HttpResponseMessage response = await httpClient.SendAsync(httpRequest).ConfigureAwait(false);
 
             return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        }
+
+        private async Task<TResult> SendAsync<TResult>(HttpRequestMessage httpRequest)
+        {
+            using var response = await httpClient.SendAsync(httpRequest).ConfigureAwait(false);
+            using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            return (await JsonSerializer.DeserializeAsync<TResult>(responseStream).ConfigureAwait(false))!;
         }
 
         #endregion

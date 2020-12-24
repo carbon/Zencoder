@@ -13,48 +13,52 @@ namespace Zencoder.Models
         [JsonPropertyName("format")]
         public string Format { get; set; }
 
+#nullable enable
+
         [JsonPropertyName("error_message")]
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
 
         [JsonPropertyName("error_class")]
-        public string ErrorClass { get; set; }
+        public string? ErrorClass { get; set; }
 
         [JsonPropertyName("frame_rate")]
-        public float FrameRate { get; set; }
+        public float? FrameRate { get; set; }
 
         [JsonPropertyName("width")]
-        public int Width { get; set; }
+        public int? Width { get; set; }
 
         [JsonPropertyName("height")]
-        public int Height { get; set; }
+        public int? Height { get; set; }
 
         [JsonPropertyName("duration_in_ms")]
-        public long DurationInMs { get; set; }
+        public long? DurationInMs { get; set; }
 
         [JsonPropertyName("video_codec")]
-        public string VideoCodec { get; set; }
+        public string? VideoCodec { get; set; }
 
         [JsonPropertyName("audio_codec")]
-        public string AudioCodec { get; set; }
+        public string? AudioCodec { get; set; }
 
         [JsonPropertyName("audio_sample_rate")]
-        public int AudioSampleRate { get; set; }
+        public int? AudioSampleRate { get; set; }
 
         [JsonPropertyName("total_bitrate_in_kbps")]
-        public int TotalBitrateInKbps { get; set; }
+        public int? TotalBitrateInKbps { get; set; }
 
         [JsonPropertyName("file_size_bytes")]
-        public long FileSizeBytes { get; set; }
+        public long? FileSizeBytes { get; set; }
+
+#nullable disable
 
         [JsonPropertyName("url")]
         public string Url { get; set; }
 
         // BASE 10
         [JsonIgnore]
-        public int Bitrate => (int)(((FileSizeBytes * 8) / 1000) / Duration.TotalSeconds);
+        public int Bitrate => FileSizeBytes.HasValue ? (int)(((FileSizeBytes * 8) / 1000) / Duration.TotalSeconds) : 0;
 
         [JsonIgnore]
-        public TimeSpan Duration => TimeSpan.FromMilliseconds(DurationInMs);
+        public TimeSpan Duration => DurationInMs is long value ? TimeSpan.FromMilliseconds(value) : TimeSpan.Zero;
 
         [JsonIgnore]
         public bool HasError => !string.IsNullOrEmpty(ErrorMessage) || !string.IsNullOrEmpty(ErrorClass);
@@ -69,6 +73,7 @@ namespace Zencoder.Models
     public sealed class OutputMediaFile : MediaFileBase
     {
         [JsonPropertyName("id")]
+        [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
         public long Id { get; set; }
 
         [JsonPropertyName("label")]
