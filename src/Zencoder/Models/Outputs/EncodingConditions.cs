@@ -18,21 +18,21 @@ namespace Zencoder.Models
         /// e.g. 640x480
         /// </summary>
         [JsonPropertyName("min_size")]
-        public string MinSize { get; set; }
+        public string MinSize { get; init; }
 
         [JsonPropertyName("max_size")]
-        public string MaxSize { get; set; }
+        public string MaxSize { get; init; }
 
         /// <summary>
         /// Skip output if the input file is shorter than the given duration, in seconds.
         /// </summary>
         [JsonPropertyName("min_duration")]
-        public int? MinDuration { get; set; }
+        public int? MinDuration { get; init; }
 
         /// <summary>
         /// Skip output if the input file is longer than the given duration, in seconds.
         /// </summary>
         [JsonPropertyName("max_duration")]
-        public int? MaxDuration { get; set; }
+        public int? MaxDuration { get; init; }
     }
 }

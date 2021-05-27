@@ -16,10 +16,10 @@ namespace Zencoder.Models
         }
 
         [JsonPropertyName("format")]
-        public string Format { get; set; }
+        public string Format { get; init; }
 
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string Url { get; init; }
 
         //  {"format": "xml", "url": "http://user:password@example.com/zencoder1"},
     }

@@ -7,15 +7,15 @@ namespace Zencoder.Models
     public sealed class StreamSpecification
     {
         [JsonPropertyName("source")]
-        public string Source { get; set; }
+        public string Source { get; init; }
 
         [JsonPropertyName("path")]
-        public string Path { get; set; }
+        public string Path { get; init; }
 
         [JsonPropertyName("bandwidth")]
-        public int? Bandwidth { get; set; }
+        public int? Bandwidth { get; init; }
 
         [JsonPropertyName("resolution")]
-        public string Resolution { get; set; }
+        public string Resolution { get; init; }
     }
 }

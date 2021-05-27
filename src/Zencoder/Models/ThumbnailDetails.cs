@@ -8,26 +8,26 @@ namespace Zencoder.Models
     public sealed class Thumbnail
     {
         [JsonPropertyName("group_label")]
-        public string GroupLabel { get; set; }
+        public string GroupLabel { get; init; }
 
         [JsonPropertyName("id")]
         [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-        public long Id { get; set; }
+        public long Id { get; init; }
 
         [JsonPropertyName("url")]
-        public Uri Url { get; set; }
+        public Uri Url { get; init; }
 
         [JsonPropertyName("format")]
-        public string Format { get; set; }
+        public string Format { get; init; }
 
         [JsonPropertyName("height")]
-        public int Height { get; set; }
+        public int Height { get; init; }
 
         [JsonPropertyName("width")]
-        public int Width { get; set; }
+        public int Width { get; init; }
 
         [JsonPropertyName("file_size_bytes")]
-        public long FileSizeBytes { get; set; }
+        public long FileSizeBytes { get; init; }
     }
 
     /*

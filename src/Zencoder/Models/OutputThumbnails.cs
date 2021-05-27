@@ -14,7 +14,7 @@ namespace Zencoder.Models
         /// at approximately 2, 4, and 6 minutes. This value must be a positive integer.
         /// </summary>
         [JsonPropertyName("number")]
-        public int? Number { get; set; }
+        public int? Number { get; init; }
 
         /// <summary>
         /// A thumbnail interval in seconds.
@@ -24,42 +24,42 @@ namespace Zencoder.Models
         /// This value must be a positive number.
         /// </summary>
         [JsonPropertyName("interval")]
-        public int? Interval { get; set; }
+        public int? Interval { get; init; }
 
         [JsonPropertyName("start_at_first_frame")]
-        public bool? StartAtFirstFrame { get; set; }
+        public bool? StartAtFirstFrame { get; init; }
 
         /// <summary>
         /// Make the output publicly readable on S3.
         /// </summary>
-        public bool? Public { get; set; }
+        public bool? Public { get; init; }
 
         [JsonPropertyName("size")]
-        public string Size { get; set; }
+        public string Size { get; init; }
 
         [JsonPropertyName("base_url")]
-        public string BaseUrl { get; set; }
+        public string BaseUrl { get; init; }
 
         [JsonPropertyName("prefix")]
-        public string Prefix { get; set; }
+        public string Prefix { get; init; }
 
         [JsonPropertyName("aspect_mode")]
-        public string AspectMode { get; set; }
+        public string AspectMode { get; init; }
 
         [JsonPropertyName("height")]
-        public int? Height { get; set; }
+        public int? Height { get; init; }
 
         [JsonPropertyName("width")]
-        public int? Width { get; set; }
+        public int? Width { get; init; }
 
         /// <summary>
         /// {{number}}_{{width}}x{{height}}-thumbnail
         /// </summary>
         [JsonPropertyName("filename")]
-        public string FileName { get; set; }
+        public string FileName { get; init; }
 
         [JsonPropertyName("format")]
-        public string Format { get; set; }
+        public string Format { get; init; }
     }
 }
 

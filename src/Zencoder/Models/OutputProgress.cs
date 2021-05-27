@@ -2,16 +2,19 @@
 
 namespace Zencoder.Models
 {
-    public class OutputProgress
+    public sealed class OutputProgress
     {
         [JsonPropertyName("state")]
-        public ZencoderJobState State { get; set; }
+        public ZencoderJobState State { get; init; }
 
         [JsonPropertyName("progress")]
-        public float Progress { get; set; }
+        public float Progress { get; init; }
 
         [JsonPropertyName("current_event")]
-        public ZencoderEventType CurrentEvent { get; set; }
+        public ZencoderEventType CurrentEvent { get; init; }
+
+        [JsonIgnore]
+        public bool IsFinished => State is ZencoderJobState.Finished;
     }
 }
 

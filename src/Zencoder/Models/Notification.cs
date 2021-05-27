@@ -7,23 +7,26 @@ namespace Zencoder.Models
     public sealed class Notification
     {
         [JsonPropertyName("job")]
-        public NotificationJob Job { get; set; }
+        public NotificationJob Job { get; init; }
 
         [JsonPropertyName("output")]
-        public OutputMediaFile Output { get; set; }
+        public OutputMediaFile Output { get; init; }
     }
 
     public sealed class NotificationJob
     {
         [JsonPropertyName("id")]
         [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-        public long Id { get; set; }
+        public long Id { get; init; }
 
         [JsonPropertyName("test")]
-        public bool Test { get; set; }
+        public bool Test { get; init; }
 
         [JsonPropertyName("state")]
-        public ZencoderJobState State { get; set; }
+        public ZencoderJobState State { get; init; }
+
+        [JsonIgnore]
+        public bool IsFinished => State is ZencoderJobState.Finished;
     }
 }
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Zencoder.Models
 {
@@ -8,27 +6,27 @@ namespace Zencoder.Models
     {
         [JsonPropertyName("id")]
         [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-        public long Id { get; set; }
+        public long Id { get; init; }
 
         [JsonPropertyName("test")]
-        public bool Test { get; set; }
+        public bool Test { get; init; }
 
         [JsonPropertyName("errors")]
-        public string[]? Errors { get; set; }
+        public string[]? Errors { get; init; }
 
         [JsonPropertyName("outputs")]
-        public OutputInfo[]? Outputs { get; set; }
-
-#nullable disable
+        public OutputInfo[]? Outputs { get; init; }
 
         public sealed class OutputInfo
         {
             [JsonPropertyName("id")]
             [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-            public long Id { get; set; }
+            public long Id { get; init; }
+
+#nullable disable
 
             [JsonPropertyName("url")]
-            public string Url { get; set; }
+            public string Url { get; init; }
         }
     }
 }

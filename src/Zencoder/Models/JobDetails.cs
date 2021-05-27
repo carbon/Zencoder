@@ -12,25 +12,25 @@ namespace Zencoder.Models
     {
         [JsonPropertyName("id")]
         [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-        public long Id { get; set; }
+        public long Id { get; init; }
 
         [JsonPropertyName("input_media_file")]
-        public InputMediaFile InputMediaFile { get; set; }
+        public InputMediaFile InputMediaFile { get; init; }
 
         [JsonPropertyName("state")]
-        public ZencoderJobState State { get; set; }
+        public ZencoderJobState State { get; init; }
 
         [JsonPropertyName("finished_at")]
-        public DateTime? FinishedAt { get; set; }
+        public DateTime? FinishedAt { get; init; }
 
         [JsonPropertyName("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; init; }
 
         [JsonPropertyName("output_media_files")]
-        public List<OutputMediaFile> OutputMediaFiles { get; set; }
+        public List<OutputMediaFile> OutputMediaFiles { get; init; }
 
         [JsonPropertyName("thumbnails")]
-        public List<Thumbnail> Thumbnails { get; set; }
+        public List<Thumbnail> Thumbnails { get; init; }
 
         public static JobDetails ParseJson(string text)
         {
@@ -45,16 +45,16 @@ namespace Zencoder.Models
         }
 
         [JsonIgnore]
-        public bool IsFinished => State == ZencoderJobState.Finished;
+        public bool IsFinished => State is ZencoderJobState.Finished;
 
         [JsonIgnore]
-        public bool IsSkipped => State == ZencoderJobState.Skipped;
+        public bool WasSkipped => State is ZencoderJobState.Skipped;
     }
 
     internal sealed class WrappedJobDetails
     {
         [JsonPropertyName("job")]
-        public JobDetails Job { get; set; }
+        public JobDetails Job { get; init; }
     }
 }
 

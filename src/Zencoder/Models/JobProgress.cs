@@ -8,27 +8,33 @@ namespace Zencoder.Models
     public sealed class JobProgress
     {
 		[JsonPropertyName("state")]
-        public ZencoderJobState State { get; set; }
+        public ZencoderJobState State { get; init; }
 
 		[JsonPropertyName("progress")]
-        public float Progress { get; set; }
+        public float Progress { get; init; }
 
         [JsonPropertyName("input")]
-        public JobProgressInput Input { get; set; }
+        public JobProgressInput Input { get; init; }
 
 		[JsonPropertyName("outputs")]
-        public List<OutputProgress> Outputs { get; set; }
-    }
+        public List<OutputProgress> Outputs { get; init; }
+
+		[JsonIgnore]
+		public bool IsFinished => State is ZencoderJobState.Finished;
+	}
 
     public sealed class JobProgressInput
     {
 		[JsonPropertyName("id")]
 		[JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-        public long Id { get; set; }
+        public long Id { get; init; }
 
 		[JsonPropertyName("state")]
-        public ZencoderJobState State { get; set; }
-    }
+        public ZencoderJobState State { get; init; }
+
+		[JsonIgnore]
+		public bool IsFinished => State is ZencoderJobState.Finished;
+	}
 
     /*
 	{

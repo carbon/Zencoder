@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using Zencoder.Models;
@@ -17,7 +17,7 @@ namespace Zencoder
         private readonly HttpClient httpClient;
 
         private static readonly JsonSerializerOptions jso = new () {
-            IgnoreNullValues = true
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
 
         };
         public ZencoderClient(string apiKey)

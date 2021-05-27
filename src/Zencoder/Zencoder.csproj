@@ -2,25 +2,17 @@
 
   <PropertyGroup>
     <AssemblyName>Zencoder</AssemblyName>
-    <VersionPrefix>2.5.3</VersionPrefix>
-    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
-    <LangVersion>9</LangVersion>
+    <TargetFramework>net5.0</TargetFramework>
+    <Version>2.6.0</Version>
     <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     
     <Authors>iamcarbon</Authors>
-    <Copyright>© 2010 - 2020 Jason Nelson</Copyright>
+    <Copyright>© 2010 - 2021 Jason Nelson</Copyright>
     <Description>A Zencoder v2 client.</Description>
     <PackageTags>zencoder async netstandard</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/carbon/Zencoder</RepositoryUrl>
   </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="System.Text.Json" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
   
 </Project>
