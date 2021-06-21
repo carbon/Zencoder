@@ -8,7 +8,7 @@ namespace Zencoder.Models.Tests
     public class JobDetailsTests
     {
         [Fact]
-        public void JobDetails3()
+        public void Deserialize()
         {
             var text = @"{
     ""id"": 141787724,
@@ -50,7 +50,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:30Z"",
         ""label"": null,
         ""frame_rate"": 0,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/dash/hq.mpd""
+        ""url"": ""http://test/23702951/dash/hq.mpd""
       },
       {
         ""id"": 424919270,
@@ -69,7 +69,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:22Z"",
         ""label"": ""dash-1350kbs"",
         ""frame_rate"": 30,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/dash/1350kbs/manifest.mpd""
+        ""url"": ""http://test/23702951/dash/1350kbs/manifest.mpd""
       },
       {
         ""id"": 424919268,
@@ -88,7 +88,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:22Z"",
         ""label"": ""dash-2000kbs"",
         ""frame_rate"": 30,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/dash/2000kbs/manifest.mpd""
+        ""url"": ""http://test/23702951/dash/2000kbs/manifest.mpd""
       },
       {
         ""id"": 424919267,
@@ -107,7 +107,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:25Z"",
         ""label"": ""dash-3500kbs"",
         ""frame_rate"": 30,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/dash/3500kbs/manifest.mpd""
+        ""url"": ""http://test/23702951/dash/3500kbs/manifest.mpd""
       },
       {
         ""id"": 424919272,
@@ -126,7 +126,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:18Z"",
         ""label"": ""dash-1000kbs"",
         ""frame_rate"": 30,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/dash/1000kbs/manifest.mpd""
+        ""url"": ""http://test/23702951/dash/1000kbs/manifest.mpd""
       },
       {
         ""id"": 424919263,
@@ -145,7 +145,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:12Z"",
         ""label"": ""mp4-2000kbs"",
         ""frame_rate"": 30,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/2000kbs.mp4""
+        ""url"": ""http://test/23702951/2000kbs.mp4""
       },
       {
         ""id"": 424919264,
@@ -164,7 +164,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:13Z"",
         ""label"": ""mp4-1350kbs"",
         ""frame_rate"": 30,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/1350kbs.mp4""
+        ""url"": ""http://test/23702951/1350kbs.mp4""
       },
       {
         ""id"": 424919265,
@@ -183,7 +183,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:08Z"",
         ""label"": ""mp4-1000kbs"",
         ""frame_rate"": 30,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/1000kbs.mp4""
+        ""url"": ""http://test/23702951/1000kbs.mp4""
       },
       {
         ""id"": 424919262,
@@ -202,7 +202,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:12:16Z"",
         ""label"": ""mp4-3500kbs"",
         ""frame_rate"": 30,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/3500kbs.mp4""
+        ""url"": ""http://test/23702951/3500kbs.mp4""
       },
       {
         ""id"": 424919273,
@@ -221,7 +221,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:11:55Z"",
         ""label"": null,
         ""frame_rate"": 0,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/dash/hd.mpd""
+        ""url"": ""http://test/23702951/dash/hd.mpd""
       },
       {
         ""id"": 424919266,
@@ -240,7 +240,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:11:55Z"",
         ""label"": ""dash-5000kbs"",
         ""frame_rate"": 0,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/dash/5000kbs/manifest.mpd""
+        ""url"": ""http://test/23702951/dash/5000kbs/manifest.mpd""
       },
       {
         ""id"": 424919261,
@@ -259,7 +259,7 @@ namespace Zencoder.Models.Tests
         ""finished_at"": ""2015-02-08T03:11:55Z"",
         ""label"": ""mp4-5000kbs"",
         ""frame_rate"": 0,
-        ""url"": ""http://cmmotion.s3.amazonaws.com/23702951/5000kbs.mp4""
+        ""url"": ""http://test/23702951/5000kbs.mp4""
       }
     ],
     ""thumbnails"": [ ]
@@ -352,7 +352,7 @@ namespace Zencoder.Models.Tests
         [Fact]
         public void NoInputTest()
         {
-            var text = @"{""job"":{""output_media_files"":[{""format"":null,""created_at"":""2011-02-01T23:11:31-05:00"",""frame_rate"":null,""finished_at"":""2011-02-01T23:11:58-05:00"",""updated_at"":""2011-02-01T23:11:58-05:00"",""duration_in_ms"":null,""audio_sample_rate"":null,""url"":""http://cmtemp.s3.amazonaws.com/10770912/1f0b2cdc474e4d7eb2f23c16a648c14a.mp4"",""id"":1558879,""error_message"":null,""error_class"":null,""audio_bitrate_in_kbps"":null,""audio_codec"":null,""height"":null,""file_size_bytes"":null,""label"":null,""video_codec"":null,""test"":false,""channels"":null,""width"":null,""video_bitrate_in_kbps"":null,""state"":""no_input""},{""format"":null,""created_at"":""2011-02-01T23:11:31-05:00"",""frame_rate"":null,""finished_at"":""2011-02-01T23:11:58-05:00"",""updated_at"":""2011-02-01T23:11:58-05:00"",""duration_in_ms"":null,""audio_sample_rate"":null,""url"":""http://cmtemp.s3.amazonaws.com/10770912/c3d125917a984b2ea2be6fd3fed2903d.webm"",""id"":1558878,""error_message"":null,""error_class"":null,""audio_bitrate_in_kbps"":null,""audio_codec"":null,""height"":null,""file_size_bytes"":null,""label"":null,""video_codec"":null,""test"":false,""channels"":null,""width"":null,""video_bitrate_in_kbps"":null,""state"":""no_input""}],""created_at"":""2011-02-01T23:11:31-05:00"",""finished_at"":""2011-02-01T23:11:58-05:00"",""updated_at"":""2011-02-01T23:11:58-05:00"",""submitted_at"":""2011-02-01T23:11:31-05:00"",""pass_through"":null,""input_media_file"":{""format"":""mpeg4"",""created_at"":""2011-02-01T23:11:31-05:00"",""frame_rate"":25,""finished_at"":""2011-02-01T23:11:58-05:00"",""updated_at"":""2011-02-01T23:12:16-05:00"",""duration_in_ms"":30120,""audio_sample_rate"":48000,""url"":""http://motion.cmcdn.net/10770912.mov"",""id"":1254506,""error_message"":null,""error_class"":""UnsupportedCodecError"",""audio_bitrate_in_kbps"":1536,""audio_codec"":""pcm_s16le"",""height"":702,""file_size_bytes"":82896941,""video_codec"":""apple intermediate codec"",""test"":false,""channels"":""2"",""width"":1248,""video_bitrate_in_kbps"":20475,""state"":""failed""},""id"":1254534,""test"":false,""thumbnails"":[],""state"":""failed""}}";
+            var text = @"{""job"":{""output_media_files"":[{""format"":null,""created_at"":""2011-02-01T23:11:31-05:00"",""frame_rate"":null,""finished_at"":""2011-02-01T23:11:58-05:00"",""updated_at"":""2011-02-01T23:11:58-05:00"",""duration_in_ms"":null,""audio_sample_rate"":null,""url"":""http://test/10770912/1f0b2cdc474e4d7eb2f23c16a648c14a.mp4"",""id"":1558879,""error_message"":null,""error_class"":null,""audio_bitrate_in_kbps"":null,""audio_codec"":null,""height"":null,""file_size_bytes"":null,""label"":null,""video_codec"":null,""test"":false,""channels"":null,""width"":null,""video_bitrate_in_kbps"":null,""state"":""no_input""},{""format"":null,""created_at"":""2011-02-01T23:11:31-05:00"",""frame_rate"":null,""finished_at"":""2011-02-01T23:11:58-05:00"",""updated_at"":""2011-02-01T23:11:58-05:00"",""duration_in_ms"":null,""audio_sample_rate"":null,""url"":""http://test/10770912/c3d125917a984b2ea2be6fd3fed2903d.webm"",""id"":1558878,""error_message"":null,""error_class"":null,""audio_bitrate_in_kbps"":null,""audio_codec"":null,""height"":null,""file_size_bytes"":null,""label"":null,""video_codec"":null,""test"":false,""channels"":null,""width"":null,""video_bitrate_in_kbps"":null,""state"":""no_input""}],""created_at"":""2011-02-01T23:11:31-05:00"",""finished_at"":""2011-02-01T23:11:58-05:00"",""updated_at"":""2011-02-01T23:11:58-05:00"",""submitted_at"":""2011-02-01T23:11:31-05:00"",""pass_through"":null,""input_media_file"":{""format"":""mpeg4"",""created_at"":""2011-02-01T23:11:31-05:00"",""frame_rate"":25,""finished_at"":""2011-02-01T23:11:58-05:00"",""updated_at"":""2011-02-01T23:12:16-05:00"",""duration_in_ms"":30120,""audio_sample_rate"":48000,""url"":""http://motion.cmcdn.net/10770912.mov"",""id"":1254506,""error_message"":null,""error_class"":""UnsupportedCodecError"",""audio_bitrate_in_kbps"":1536,""audio_codec"":""pcm_s16le"",""height"":702,""file_size_bytes"":82896941,""video_codec"":""apple intermediate codec"",""test"":false,""channels"":""2"",""width"":1248,""video_bitrate_in_kbps"":20475,""state"":""failed""},""id"":1254534,""test"":false,""thumbnails"":[],""state"":""failed""}}";
 
             var job = JobDetails.ParseJson(text);
 
@@ -409,7 +409,7 @@ namespace Zencoder.Models.Tests
             ""format"": ""png"",
             ""created_at"": ""2011-01-21T21:37:36-06:00"",
             ""updated_at"": ""2011-01-21T21:37:36-06:00"",
-            ""url"": ""http://cmtemp.s3.amazonaws.com/2486113/320x240_32.png"",
+            ""url"": ""http://test/2486113/320x240_32.png"",
             ""id"": 2272361,
             ""height"": 240,
             ""file_size_bytes"": 302,
@@ -420,7 +420,7 @@ namespace Zencoder.Models.Tests
             ""format"": ""png"",
             ""created_at"": ""2011-01-21T21:37:36-06:00"",
             ""updated_at"": ""2011-01-21T21:37:36-06:00"",
-            ""url"": ""http://cmtemp.s3.amazonaws.com/2486113/320x240_31.png"",
+            ""url"": ""http://test/2486113/320x240_31.png"",
             ""id"": 2272360,
             ""height"": 240,
             ""file_size_bytes"": 302,
@@ -437,7 +437,7 @@ namespace Zencoder.Models.Tests
             ""updated_at"": ""2011-01-21T21:37:36-06:00"",
             ""duration_in_ms"": 32065,
             ""audio_sample_rate"": 44100,
-            ""url"": ""http://cmtemp.s3.amazonaws.com/2486113/67c6f15340224e61a2ab9ff9d7a15323.mp4"",
+            ""url"": ""http://test/2486113/67c6f15340224e61a2ab9ff9d7a15323.mp4"",
             ""id"": 1402040,
             ""error_message"": null,
             ""error_class"": null,
@@ -468,7 +468,7 @@ namespace Zencoder.Models.Tests
             Assert.Equal(320, thumb.Width);
             Assert.Equal(240, thumb.Height);
             Assert.Equal(302, thumb.FileSizeBytes);
-            Assert.Equal(new Uri("http://cmtemp.s3.amazonaws.com/2486113/320x240_32.png"), thumb.Url);
+            Assert.Equal(new Uri("http://test/2486113/320x240_32.png"), thumb.Url);
 
             Assert.Equal(29f, job.InputMediaFile.FrameRate);
             Assert.False(job.InputMediaFile.HasError);
@@ -480,22 +480,7 @@ namespace Zencoder.Models.Tests
             Assert.Equal("h264",                    output.VideoCodec);
             Assert.Equal(ZencoderJobState.Finished, output.State);
 
-            // Assert.Equal("2",     output.Channels);
-
             Assert.Equal(2, job.Thumbnails.Count);
-
-            /*
-			 group_label: null,
-        format: ""png"",
-        created_at: ""2011-01-21T21:37:36-06:00"",
-        updated_at: ""2011-01-21T21:37:36-06:00"",
-        url: ""http://cmtemp.s3.amazonaws.com/2486113/320x240_32.png"",
-        id: 2272361,
-        height: 240,
-        file_size_bytes: 302,
-        width: 320
-			*/
-
         }
 
         [Fact]

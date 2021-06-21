@@ -59,7 +59,7 @@ namespace Zencoder.Models.Tests
  ""format"": ""mpeg4"",
  ""width"": 768,
  ""height"": 432,
- ""url"": ""http://cmtemp.s3.amazonaws.com/a.mp4""
+ ""url"": ""http://test/a.mp4""
 }";
 
 
@@ -75,7 +75,7 @@ namespace Zencoder.Models.Tests
             Assert.Equal(432, output.Height);
             Assert.Equal(5923771, output.FileSizeBytes);
 
-            Assert.Equal("http://cmtemp.s3.amazonaws.com/a.mp4", output.Url);
+            Assert.Equal("http://test/a.mp4", output.Url);
         }
     }
 }

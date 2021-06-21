@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using Xunit;
@@ -8,31 +7,26 @@ namespace Zencoder.Models.Tests
 {
     public class JobCreateRequestTests
     {
-        private static readonly JsonSerializerOptions jso = new JsonSerializerOptions  {
-            WriteIndented = true,
-            IgnoreNullValues = true
-        };
-
         [Fact]
-        public void Test1()
+        public void Serialize()
         {
             var job = new JobCreateRequest
             {
                 ApiKey = "x",
-                Input = "http://google.com/test.mp4",
+                Input = "http://test/video.mp4",
 
                 Outputs =  {
                     new OutputSpecification {
                         Label = "Square",
                         Width = 100,
                         Height = 100,
-                        Url = "http://google.com/test2.mp4",
+                        Url = "http://test/output.mp4",
                         Quality = 5,
                         Speed = 1,
                         Public = true,
                         VideoCodec = "vp8",
                         Notifications = new[] {
-                            new NotificationSpecification("json", new Uri("http://google.com/"))
+                            new NotificationSpecification("json", "http://test/")
                         }
                     }
                 }
@@ -42,11 +36,11 @@ namespace Zencoder.Models.Tests
 
             Assert.Equal(@"{
   ""api_key"": ""x"",
-  ""input"": ""http://google.com/test.mp4"",
+  ""input"": ""http://test/video.mp4"",
   ""outputs"": [
     {
       ""label"": ""Square"",
-      ""url"": ""http://google.com/test2.mp4"",
+      ""url"": ""http://test/output.mp4"",
       ""video_codec"": ""vp8"",
       ""width"": 100,
       ""height"": 100,
@@ -56,19 +50,19 @@ namespace Zencoder.Models.Tests
       ""notifications"": [
         {
           ""format"": ""json"",
-          ""url"": ""http://google.com/""
+          ""url"": ""http://test/""
         }
       ]
     }
   ]
-}", JsonSerializer.Serialize(job, jso));
+}", JsonSerializer.Serialize(job, JSO.Default));
         }
 
         [Fact]
         public void Test2()
         {
             var job = new JobCreateRequest {
-                Input = "http://media.cmcdn.net/7265014.mov",
+                Input = "https://test/7265014.mov",
                 Outputs = {
                     new OutputSpecification {
                         Width = 768,
@@ -76,14 +70,14 @@ namespace Zencoder.Models.Tests
                         Quality = 3,
                         Speed = 2,
                         Notifications = new NotificationSpecification[] {
-                            new () { Format = "json", Url = new Uri("http://platform.carbonmade.net/zencoder/notifications/recieve") }
+                            new ("json", url: "http://test/zencoder/notifications/recieve")
                         }
                     }
                 }
             };
 
             Assert.Equal(@"{
-  ""input"": ""http://media.cmcdn.net/7265014.mov"",
+  ""input"": ""https://test/7265014.mov"",
   ""outputs"": [
     {
       ""width"": 768,
@@ -93,12 +87,12 @@ namespace Zencoder.Models.Tests
       ""notifications"": [
         {
           ""format"": ""json"",
-          ""url"": ""http://platform.carbonmade.net/zencoder/notifications/recieve""
+          ""url"": ""http://test/zencoder/notifications/recieve""
         }
       ]
     }
   ]
-}", JsonSerializer.Serialize(job, jso));
+}", JsonSerializer.Serialize(job, JSO.Default));
         }
 
 
@@ -321,7 +315,7 @@ namespace Zencoder.Models.Tests
       ]
     }
   ]
-}", JsonSerializer.Serialize(job, jso));
+}", JsonSerializer.Serialize(job, JSO.Default));
         }
 
     }

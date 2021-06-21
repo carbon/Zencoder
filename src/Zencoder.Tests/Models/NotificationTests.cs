@@ -23,7 +23,7 @@ namespace Zencoder.Models.Tests
         [Fact]
         public void ParseNotification3()
         {
-            var text = @"{""output"":{""url"":""http://cmtemp.s3.amazonaws.com/2486113/67c6f15340224e61a2ab9ff9d7a15323.mp4"",""state"":""finished"",""label"":null,""id"":1402040},""job"":{""state"":""finished"",""id"":1130804}}";
+            var text = @"{""output"":{""url"":""http://test/2486113/67c6f15340224e61a2ab9ff9d7a15323.mp4"",""state"":""finished"",""label"":null,""id"":1402040},""job"":{""state"":""finished"",""id"":1130804}}";
 
 
             var n = JsonSerializer.Deserialize<Notification>(text);
