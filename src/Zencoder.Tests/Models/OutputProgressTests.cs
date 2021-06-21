@@ -23,7 +23,7 @@ namespace Zencoder.Models.Tests
             var progress = JsonSerializer.Deserialize<OutputProgress>(@"{""state"": ""processing"",""current_event"": ""Transcoding"",""progress"": 32.34567345}");
 
             Assert.Equal(ZencoderJobState.Processing, progress.State);
-            Assert.Equal(32.34567D, progress.Progress, 5);
+            Assert.Equal(32.34567, progress.Progress, 5);
 
             Assert.Equal(ZencoderEventType.Transcoding, progress.CurrentEvent);
         }

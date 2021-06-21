@@ -7,7 +7,7 @@ namespace Zencoder.Models.Tests
     public class OutputMediaFileTests
     {
         [Fact]
-        public void Parse2()
+        public void Deserialize()
         {
             var json = @"{
   ""audio_bitrate_in_kbps"": 96,
@@ -39,7 +39,6 @@ namespace Zencoder.Models.Tests
             Assert.Equal(29, (int)output.FrameRate);
             Assert.Equal(624, output.Width);
             Assert.Equal(352, output.Height);
-
         }
 
         [Fact]
@@ -61,7 +60,6 @@ namespace Zencoder.Models.Tests
  ""height"": 432,
  ""url"": ""http://test/a.mp4""
 }";
-
 
             var output = JsonSerializer.Deserialize<OutputMediaFile>(json);
 

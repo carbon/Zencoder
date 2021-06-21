@@ -265,7 +265,6 @@ namespace Zencoder.Models.Tests
     ""thumbnails"": [ ]
   }";
 
-
             var job = JobDetails.ParseJson(text);
         }
 
@@ -344,9 +343,7 @@ namespace Zencoder.Models.Tests
 
             var job = JobDetails.ParseJson(text);
 
-
             Assert.Equal(ZencoderJobState.Finished, job.InputMediaFile.State);
-
         }
 
         [Fact]
@@ -384,7 +381,7 @@ namespace Zencoder.Models.Tests
         ""updated_at"": ""2011-01-21T21:35:26-06:00"",
         ""duration_in_ms"": 32065,
         ""audio_sample_rate"": 44100,
-        ""url"": ""http://media.cmcdn.net/2486113.mov"",
+        ""url"": ""http://test/2486113.mov"",
         ""id"": 1130776,
         ""error_message"": null,
         ""error_class"": null,
@@ -458,9 +455,6 @@ namespace Zencoder.Models.Tests
     ""state"": ""finished""
     }";
             var job = JobDetails.ParseJson(text);
-
-            // Console.WriteLine(XNode.FromObject(job).ToString());
-
             var thumb = job.Thumbnails[0];
             var output = job.OutputMediaFiles[0];
 
@@ -472,7 +466,6 @@ namespace Zencoder.Models.Tests
 
             Assert.Equal(29f, job.InputMediaFile.FrameRate);
             Assert.False(job.InputMediaFile.HasError);
-
 
             Assert.Equal("mpeg4",                   output.Format);
             Assert.Equal(240,                       output.Height);
@@ -573,7 +566,7 @@ namespace Zencoder.Models.Tests
         [Fact]
         public void ParseJob()
         {
-            var text = @"{""job"":{""thumbnails"":[],""created_at"":""2010-10-13T16:01:31-04:00"",""output_media_files"":[{""format"":""mpeg4"",""created_at"":""2010-10-13T16:01:31-04:00"",""frame_rate"":29,""finished_at"":""2010-10-13T16:01:53-04:00"",""updated_at"":""2010-10-13T16:01:53-04:00"",""duration_in_ms"":5038,""audio_sample_rate"":48000,""url"":""https://zencoder-live.s3.amazonaws.com:443/a054767b9cde8c22382716440fcbb775%2F4668501c716bf1cc8da463617f513463.mp4?Signature=sR6QwIyQR3sdmgQH8F%2Ft8mgpNk4%3D&Expires=1287086513&AWSAccessKeyId=AKIAIIEXNN2J4YDTRUVQ"",""id"":420991,""error_message"":null,""error_class"":null,""audio_bitrate_in_kbps"":111,""audio_codec"":""aac"",""height"":240,""file_size_bytes"":223526,""video_codec"":""h264"",""test"":true,""channels"":""2"",""label"":null,""width"":320,""video_bitrate_in_kbps"":239,""state"":""finished""}],""finished_at"":""2010-10-13T16:02:06-04:00"",""updated_at"":""2010-10-13T16:02:06-04:00"",""submitted_at"":""2010-10-13T16:01:31-04:00"",""pass_through"":null,""id"":325700,""input_media_file"":{""format"":""mpeg4"",""created_at"":""2010-10-13T16:01:31-04:00"",""frame_rate"":29,""finished_at"":""2010-10-13T16:01:44-04:00"",""updated_at"":""2010-10-13T16:01:44-04:00"",""duration_in_ms"":15296,""audio_sample_rate"":48000,""url"":""http://media.cmcdn.net/7265014.mov"",""id"":325696,""error_message"":null,""error_class"":null,""audio_bitrate_in_kbps"":199,""audio_codec"":""aac"",""height"":240,""file_size_bytes"":1894392,""video_codec"":""mpeg4"",""test"":true,""channels"":""2"",""width"":320,""video_bitrate_in_kbps"":790,""state"":""finished""},""test"":true,""state"":""finished""}}";
+            var text = @"{""job"":{""thumbnails"":[],""created_at"":""2010-10-13T16:01:31-04:00"",""output_media_files"":[{""format"":""mpeg4"",""created_at"":""2010-10-13T16:01:31-04:00"",""frame_rate"":29,""finished_at"":""2010-10-13T16:01:53-04:00"",""updated_at"":""2010-10-13T16:01:53-04:00"",""duration_in_ms"":5038,""audio_sample_rate"":48000,""url"":""https://zencoder-live.s3.amazonaws.com:443/a054767b9cde8c22382716440fcbb775%2F4668501c716bf1cc8da463617f513463.mp4?Signature=sR6QwIyQR3sdmgQH8F%2Ft8mgpNk4%3D&Expires=1287086513&AWSAccessKeyId=AKIAIIEXNN2J4YDTRUVQ"",""id"":420991,""error_message"":null,""error_class"":null,""audio_bitrate_in_kbps"":111,""audio_codec"":""aac"",""height"":240,""file_size_bytes"":223526,""video_codec"":""h264"",""test"":true,""channels"":""2"",""label"":null,""width"":320,""video_bitrate_in_kbps"":239,""state"":""finished""}],""finished_at"":""2010-10-13T16:02:06-04:00"",""updated_at"":""2010-10-13T16:02:06-04:00"",""submitted_at"":""2010-10-13T16:01:31-04:00"",""pass_through"":null,""id"":325700,""input_media_file"":{""format"":""mpeg4"",""created_at"":""2010-10-13T16:01:31-04:00"",""frame_rate"":29,""finished_at"":""2010-10-13T16:01:44-04:00"",""updated_at"":""2010-10-13T16:01:44-04:00"",""duration_in_ms"":15296,""audio_sample_rate"":48000,""url"":""http://test/7265014.mov"",""id"":325696,""error_message"":null,""error_class"":null,""audio_bitrate_in_kbps"":199,""audio_codec"":""aac"",""height"":240,""file_size_bytes"":1894392,""video_codec"":""mpeg4"",""test"":true,""channels"":""2"",""width"":320,""video_bitrate_in_kbps"":790,""state"":""finished""},""test"":true,""state"":""finished""}}";
 
             var job = JobDetails.ParseJson(text);
 
@@ -590,8 +583,7 @@ namespace Zencoder.Models.Tests
             Assert.Equal(320, input.Width);
             Assert.Equal(48000, input.AudioSampleRate);
             Assert.Null(input.ErrorMessage);
-            Assert.Equal("http://media.cmcdn.net/7265014.mov", input.Url);
+            Assert.Equal("http://test/7265014.mov", input.Url);
         }
-
     }
 }
